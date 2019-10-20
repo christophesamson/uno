@@ -13,6 +13,7 @@
 #include <avr/wdt.h>
 #include <DiOremote.h> //commande 433mhz
 #include "confVolets.h" //conf externalisée
+//#include "volet.h" //objet volet
 
 // Enter a MAC address for your controller below.
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x0E, 0xFE, 0x40 };
@@ -73,6 +74,9 @@ void setup(void)
 
   // Start watchdog
   wdt_enable(WDTO_4S);
+
+  //init volets
+  //Volet voletSalon(SALON_UP_CODE,SALON_DOWN_CODE,myRemote);
 }
 
 void loop() {
@@ -111,6 +115,8 @@ int voletControl(String command){
     if(command=="salonDown") myRemote.send(SALON_DOWN_CODE);
     if(command=="terrasseUp") myRemote.send(TERRASSE_UP_CODE);
     if(command=="terrasseDown") myRemote.send(TERRASSE_DOWN_CODE);
+    if(command=="portailOn") myRemote.send(PORTAIL_ON_CODE);
+    if(command=="portailOff") myRemote.send(PORTAIL_OFF_CODE);
     if(command=="allUp"){
       myRemote.send(SALON_UP_CODE);
       myRemote.send(TERRASSE_UP_CODE);
